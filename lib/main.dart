@@ -9,6 +9,7 @@ import 'package:task_app/screens/add_task_form.dart';
 import 'package:task_app/screens/auth/login_screen.dart';
 import 'package:task_app/screens/auth/signIn.dart';
 import 'package:task_app/screens/home_screen.dart';
+import 'package:task_app/screens/main_screen.dart';
 import 'package:task_app/screens/task_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -67,27 +68,13 @@ class _MyAppState extends State<MyApp> {
               }
               if (snapshot.connectionState == ConnectionState.done) {
                 print("done");
-                return FirebaseAuth.instance.currentUser == null
-                    ? LoginScreen()
-                    : HomeScreen();
-                // return StreamBuilder(
-                //     stream: FirebaseAuth.instance.authStateChanges(),
-                //     builder: (ctx, authSnapshot) {
-                //       if (snapshot.connectionState != ConnectionState.active) {
-                //         return Center(child: CircularProgressIndicator());
-                //       }
-                //       final user = snapshot.data;
-                //       if (user != null) {
-                //         return HomeScreen();
-                //       } else {
-                //         return LoginScreen();
-                //       }
-                //     });
+                return MainScreen();
+                
               }
               return CircularProgressIndicator();
             }),
         routes: {
-          RegisterScreen.routName:(ctx)=>RegisterScreen(),
+          RegisterScreen.routName: (ctx) => RegisterScreen(),
           LoginScreen.routName: (ctx) => LoginScreen(),
           NewTask.routName: (ctx) => NewTask(),
           TaskScreen.routName: (ctx) => TaskScreen(),

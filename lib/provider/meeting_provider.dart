@@ -45,7 +45,7 @@ class UserMeeting with ChangeNotifier {
       "timeStart": formatTimeOfDay(timeSelectedStart),
       "timeEnd": formatTimeOfDay(timeSelectedEnd),
       "date": dateSelected,
-      "day": dateSelected.day,
+      "day": dateSelected.hashCode,
     };
     print(formatTimeOfDay(timeSelectedStart));
     try {

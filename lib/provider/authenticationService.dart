@@ -25,7 +25,7 @@ class AuthenticationService with ChangeNotifier {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        login(email: email, password: password);
+        return;
       }
     }
   }

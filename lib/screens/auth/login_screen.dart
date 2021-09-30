@@ -70,14 +70,30 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   trailing: IconButton(
                     onPressed: () {
-                      Provider.of<AuthenticationService>(context, listen: false)
-                          .login(
-                        email: emailController.text,
-                        password: passwordController.text,
-                      )
-                          .then((value) {
-                        Navigator.of(context).pushNamed(HomeScreen.routName);
-                      });
+                      FutureBuilder(
+                        future: Provider.of<AuthenticationService>(context,
+                                listen: false)
+                            .login(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        ),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Text("Not connected");
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            print("done");
+                            Navigator.of(context)
+                                .pushNamed(HomeScreen.routName);
+                          }
+                          return CircularProgressIndicator();
+                        },
+                      );
+
+                      //     .then((value) {
+
+                      // });
                     },
                     icon: Icon(
                       Icons.arrow_forward,
