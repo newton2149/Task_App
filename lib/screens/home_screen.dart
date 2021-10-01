@@ -31,7 +31,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
@@ -45,6 +44,7 @@ class HomeScreen extends StatelessWidget {
               size: 30,
             ),
           ),
+          Spacer(),
           IconButton(
             onPressed: () {
               Provider.of<AuthenticationService>(context, listen: false)
@@ -52,6 +52,14 @@ class HomeScreen extends StatelessWidget {
             },
             icon: Icon(
               Icons.logout_outlined,
+              color: Colors.black,
+              size: 30,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.settings_outlined,
               color: Colors.black,
               size: 30,
             ),

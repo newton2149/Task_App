@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,7 +19,14 @@ class AuthenticationService with ChangeNotifier {
       required String name}) async {
     try {
       await firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
+          email: email, password: password)
+          .then((value) {
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(value.user!.uid)
+            .set({"createdAT": DateTime.now()});
+      });
+
       await firebaseAuth.currentUser!.updateDisplayName(name);
       await firebaseAuth.currentUser!.reload();
     } on FirebaseAuthException catch (e) {

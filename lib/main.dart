@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(
             create: (ctx) =>
-                UserMeeting(FirebaseFirestore.instance.collection('tasks'))),
+                UserMeeting(FirebaseFirestore.instance.collection('users'))),
         ChangeNotifierProvider(create: (ctx) => UiProvider()),
         Provider<AuthenticationService>(
             create: (ctx) =>

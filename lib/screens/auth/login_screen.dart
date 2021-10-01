@@ -70,30 +70,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   trailing: IconButton(
                     onPressed: () {
-                      FutureBuilder(
-                        future: Provider.of<AuthenticationService>(context,
-                                listen: false)
-                            .login(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        ),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return Text("Not connected");
-                          }
-                          if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            print("done");
-                            Navigator.of(context)
-                                .pushNamed(HomeScreen.routName);
-                          }
-                          return CircularProgressIndicator();
-                        },
-                      );
-
-                      //     .then((value) {
-
-                      // });
+                      Provider.of<AuthenticationService>(context, listen: false)
+                          .login(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      )
+                          .then((value) {
+                        Navigator.of(context).pushNamed(HomeScreen.routName);
+                      });
                     },
                     icon: Icon(
                       Icons.arrow_forward,
@@ -182,7 +166,8 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           TextButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(RegisterScreen.routName);
+              Navigator.of(context)
+                  .pushReplacementNamed(RegisterScreen.routName);
             },
             child: Text(
               "SignUp",

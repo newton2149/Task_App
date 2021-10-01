@@ -1,6 +1,5 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:task_app/models/meeting.dart';
 import 'package:intl/intl.dart';
@@ -45,11 +44,14 @@ class UserMeeting with ChangeNotifier {
       "timeStart": formatTimeOfDay(timeSelectedStart),
       "timeEnd": formatTimeOfDay(timeSelectedEnd),
       "date": dateSelected,
-      "day": dateSelected.hashCode,
+      "day": dateSelected.day,
     };
     print(formatTimeOfDay(timeSelectedStart));
     try {
-      final response = await tasks.add(jsonData);
+      final response = await tasks
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection("tasks")
+          .add(jsonData);
       print("User Added");
       _userMeeting.add(newMeeting);
       print(_userMeeting);

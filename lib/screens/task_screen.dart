@@ -190,8 +190,8 @@ class TaskScreen extends StatelessWidget {
             StreamBuilder<QuerySnapshot>(
               // <2> Pass `Stream<QuerySnapshot>` to stream
               stream: FirebaseFirestore.instance
-                  .collection('tasks')
-                  .where("day", isEqualTo: date.dateTimeSelected.hashCode)
+                  .collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection("tasks")
+                  .where("day", isEqualTo: date.dateTimeSelected.day)
                   .snapshots(includeMetadataChanges: true),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
