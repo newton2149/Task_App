@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:task_app/provider/authenticationService.dart';
+import 'package:task_app/screens/notification_screen.dart';
 import 'package:task_app/screens/task_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -37,7 +37,9 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: bgColour,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(NotificationScreen.routName);
+            },
             icon: Icon(
               Icons.notifications_outlined,
               color: Colors.black,
@@ -47,17 +49,8 @@ class HomeScreen extends StatelessWidget {
           Spacer(),
           IconButton(
             onPressed: () {
-              Provider.of<AuthenticationService>(context, listen: false)
-                  .signOut();
+              Navigator.of(context).pushNamed("/app-settings");
             },
-            icon: Icon(
-              Icons.logout_outlined,
-              color: Colors.black,
-              size: 30,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
             icon: Icon(
               Icons.settings_outlined,
               color: Colors.black,
@@ -108,7 +101,10 @@ class HomeScreen extends StatelessWidget {
                                   backgroundColor: Colors.blue,
                                   child: Center(
                                     child: Text(
-                                      "N",
+                                      FirebaseAuth
+                                          .instance.currentUser!.displayName
+                                          .toString()[0]
+                                          .toUpperCase(),
                                       style: GoogleFonts.poppins(
                                         textStyle: TextStyle(
                                           color: Colors.white,

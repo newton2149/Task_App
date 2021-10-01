@@ -74,12 +74,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: () {
                       Provider.of<AuthenticationService>(context, listen: false)
                           .signUp(
-                        email: emailController.text,
-                        password: passwordController.text,
-                        name: nameController.text
-                      )
+                              email: emailController.text,
+                              password: passwordController.text,
+                              name: nameController.text)
                           .then((value) {
-                        Navigator.of(context).pushNamed(HomeScreen.routName);
+                        Navigator.of(context)
+                            .pushReplacementNamed(HomeScreen.routName);
                       });
                     },
                     icon: Icon(

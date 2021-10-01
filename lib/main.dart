@@ -10,6 +10,8 @@ import 'package:task_app/screens/auth/login_screen.dart';
 import 'package:task_app/screens/auth/signIn.dart';
 import 'package:task_app/screens/home_screen.dart';
 import 'package:task_app/screens/main_screen.dart';
+import 'package:task_app/screens/notification_screen.dart';
+import 'package:task_app/screens/settings.dart';
 import 'package:task_app/screens/task_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -69,7 +71,6 @@ class _MyAppState extends State<MyApp> {
               if (snapshot.connectionState == ConnectionState.done) {
                 print("done");
                 return MainScreen();
-                
               }
               return CircularProgressIndicator();
             }),
@@ -79,6 +80,8 @@ class _MyAppState extends State<MyApp> {
           NewTask.routName: (ctx) => NewTask(),
           TaskScreen.routName: (ctx) => TaskScreen(),
           HomeScreen.routName: (ctx) => HomeScreen(),
+          SettingsScreen.routName: (ctx) => SettingsScreen(),
+          NotificationScreen.routName: (ctx) => NotificationScreen(),
         },
       ),
     );

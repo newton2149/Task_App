@@ -76,7 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         password: passwordController.text,
                       )
                           .then((value) {
-                        Navigator.of(context).pushNamed(HomeScreen.routName);
+                        Navigator.of(context)
+                            .pushReplacementNamed(HomeScreen.routName);
                       });
                     },
                     icon: Icon(
