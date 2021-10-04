@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:task_app/provider/authenticationService.dart';
+import 'package:task_app/screens/main_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const routName = "/app-settings";
@@ -53,7 +54,11 @@ class SettingsScreen extends StatelessWidget {
                   leading: Icon(Icons.logout_outlined),
                   onPressed: (BuildContext context) {
                     Provider.of<AuthenticationService>(context, listen: false)
-                  .signOut();
+                        .signOut()
+                        .then((value) {
+                      Navigator.of(context)
+                          .pushReplacementNamed(MainScreen.routeName);
+                    });
                   },
                 ),
               ],

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -70,6 +72,13 @@ class Meetingcard extends StatelessWidget {
         ),
       ),
       onDismissed: (direction) {
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection("tasks")
+            .doc(id)
+            .delete();
+
         data.delete(id);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

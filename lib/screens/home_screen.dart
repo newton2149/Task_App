@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:task_app/components/bar_chart.dart';
 import 'package:task_app/provider/authenticationService.dart';
 import 'package:task_app/screens/notification_screen.dart';
 import 'package:task_app/screens/task_screen.dart';
@@ -140,7 +141,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
                 leading: Text(
-                  "My tasks",
+                  "Weekly Report",
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
                       color: Colors.black,
@@ -176,6 +177,20 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50),
                       ),
                     ),
+                  ),
+                ),
+              ),
+            ),
+            BarChartSample3(),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, left: 20),
+              child: Text(
+                "My Tasks",
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
                   ),
                 ),
               ),
@@ -246,43 +261,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 20),
-              child: Text(
-                "Your Weekly Report",
-                style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                  ),
-                ),
-              ),
-            ),
-            // StreamBuilder<QuerySnapshot>(
-            //     stream:
-            //         FirebaseFirestore.instance.collection("tasks").snapshots(),
-            //     builder: (context, snapshot) {
-            //       if (snapshot.hasData) {
-            //         return GridView.builder(
-            //             padding: EdgeInsets.all(8),
-            //             shrinkWrap: true,
-            //             physics: NeverScrollableScrollPhysics(),
-            //             gridDelegate:
-            //                 const SliverGridDelegateWithFixedCrossAxisCount(
-            //               crossAxisCount: 2,
-            //               mainAxisSpacing: 10,
-            //               crossAxisSpacing: 10,
-            //             ),
-            //             itemCount: snapshot.data!.docs.length,
-            //             itemBuilder: (BuildContext context, int i) {
-            //               return ActiveTaskCard(
-            //                   snapshot.data!.docs[i].get("title"));
-            //             });
-            //       } else {
-            //         return CircularProgressIndicator();
-            //       }
-            //     })
           ],
         ),
       ),

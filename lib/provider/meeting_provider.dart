@@ -51,7 +51,8 @@ class UserMeeting with ChangeNotifier {
       final response = await tasks
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection("tasks")
-          .add(jsonData);
+          .doc(id)
+          .set(jsonData);
       print("User Added");
       _userMeeting.add(newMeeting);
       print(_userMeeting);

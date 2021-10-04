@@ -4,6 +4,7 @@ import 'auth/login_screen.dart';
 import 'home_screen.dart';
 
 class MainScreen extends StatefulWidget {
+  static const routeName = "/main-screen";
   @override
   State<MainScreen> createState() => _MainScreenState();
 }

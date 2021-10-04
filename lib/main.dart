@@ -82,6 +82,7 @@ class _MyAppState extends State<MyApp> {
           HomeScreen.routName: (ctx) => HomeScreen(),
           SettingsScreen.routName: (ctx) => SettingsScreen(),
           NotificationScreen.routName: (ctx) => NotificationScreen(),
+          MainScreen.routeName:(ctx)=>MainScreen(),
         },
       ),
     );
