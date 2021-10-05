@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:provider/provider.dart';
 import 'package:task_app/components/bar_chart.dart';
-import 'package:task_app/provider/authenticationService.dart';
 import 'package:task_app/screens/notification_screen.dart';
 import 'package:task_app/screens/task_screen.dart';
 

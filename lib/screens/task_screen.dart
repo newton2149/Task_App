@@ -72,22 +72,6 @@ class TaskScreen extends StatelessWidget {
           ),
         ),
         elevation: 0,
-        // actions: [
-        //   IconButton(
-        //     onPressed: () {},
-        //     icon: Icon(
-        //       Icons.notifications_outlined,
-        //       color: Colors.black,
-        //     ),
-        //   ),
-        //   IconButton(
-        //     onPressed: () {},
-        //     icon: Icon(
-        //       Icons.more_vert_outlined,
-        //       color: Colors.black,
-        //     ),
-        //   ),
-        // ],
       ),
       body: SingleChildScrollView(
         physics: ScrollPhysics(),
@@ -169,40 +153,22 @@ class TaskScreen extends StatelessWidget {
                 ),
               ),
             ),
-
-            // Consumer<UserMeeting>(
-            //   builder: (context, data, child) => ListView.builder(
-            //     shrinkWrap: true,
-            //     physics: NeverScrollableScrollPhysics(),
-            //     itemBuilder: (ctx, i) => Meetingcard(
-            //         id: data.sortItemByDate(date.dateTimeSelected)[i].id,
-            //         title: data.sortItemByDate(date.dateTimeSelected)[i].title,
-            //         description: data
-            //             .sortItemByDate(date.dateTimeSelected)[i]
-            //             .description,
-            //         time: data
-            //             .sortItemByDate(date.dateTimeSelected)[i]
-            //             .timeStart),
-            //     itemCount: data.sortItemByDate(date.dateTimeSelected).length,
-            //   ),
-            // ),
-
             StreamBuilder<QuerySnapshot>(
-              // <2> Pass `Stream<QuerySnapshot>` to stream
               stream: FirebaseFirestore.instance
-                  .collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection("tasks")
+                  .collection('users')
+                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .collection("tasks")
                   .where("day", isEqualTo: date.dateTimeSelected.day)
                   .snapshots(includeMetadataChanges: true),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
-                  // <3> Retrieve `List<DocumentSnapshot>` from snapshot
                   final List<DocumentSnapshot> documents = snapshot.data!.docs;
                   print(documents);
                   return ListView(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       children: documents.map((DocumentSnapshot doc) {
-                        print(doc.get("date"));
+                        debugPrint(doc.get("date"));
                         print(Timestamp.fromDate(date.dateTimeSelected));
 
                         return Meetingcard(
@@ -213,7 +179,7 @@ class TaskScreen extends StatelessWidget {
                       }).toList());
                 } else if (snapshot.connectionState ==
                     ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
                 } else if (!snapshot.hasData) {
                   return Text("Add new Tasks");
                 } else {
